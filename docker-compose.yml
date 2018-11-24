@@ -1,0 +1,23 @@
+version: "3.5"
+services:
+  jdb:
+    image: postgres:9.6-alpine
+    container_name: jdb
+    ports:
+    - "5432:5432"
+    environment:
+    - "POSTGRES_DB=docker"
+    - "POSTGRES_USER=docker"
+    - "POSTGRES_PASSWORD=docker"
+
+  jback:
+    image: kineticcookie/junction-backend:latest
+    container_name: jback
+    depends_on:
+      - jdb
+    ports:
+      - 9090:9090
+    volumes:
+      - ./config/backend.conf:/app/app.conf
+    environment:
+      - "DATABASE_HOST=jdb"

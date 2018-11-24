@@ -1,0 +1,19 @@
+CREATE TABLE users
+(
+  id TEXT PRIMARY KEY,
+  name TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE buses
+(
+    id TEXT PRIMARY KEY,
+    x DECIMAL NOT NULL,
+    y DECIMAL NOT NULL
+);
+
+CREATE TABLE waypoints
+(
+    user_id TEXT PRIMARY KEY REFERENCES users(id),
+    x DECIMAL NOT NULL,
+    y DECIMAL NOT NULL
+);
